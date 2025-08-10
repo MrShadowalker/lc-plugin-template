@@ -7,8 +7,7 @@
 
 package leetcode.editor.cn;
 
-import java.util.*;
-import leetcode.editor.common.*;
+import leetcode.editor.common.ListNode;
 
 public class MergeTwoSortedLists {
 

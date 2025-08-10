@@ -1,0 +1,67 @@
+package leetcode.editor.cn;
+
+import java.util.*;
+import leetcode.editor.common.*;
+
+public class ThreeSum {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            // 先排序
+            Arrays.sort(nums);
+            int len = nums.length;
+            List<List<Integer>> res = new ArrayList<>();
+            // 穷举第一个数
+            for (int i = 0; i < len; i++) {
+                int target = -nums[i];
+                List<List<Integer>> tuples = twoSumTarget(nums, i + 1, target);
+                // 如果存在满足条件的二元组，再加上nums[i]就是结果的三元组
+                for (List<Integer> tuple : tuples) {
+                    tuple.add(nums[i]);
+                    res.add(tuple);
+                }
+                // 由于已经排序了，可能存在第一个数相同的情况，会导致答案中包含重复的三元组
+                // 跳过第一个数重复的情况
+                while (i < len - 1 && nums[i] == nums[i + 1]) {
+                    i++;
+                }
+            }
+            return res;
+        }
+
+        // 有序数组两数之和
+        private List<List<Integer>> twoSumTarget(int[] nums, int start, int target) {
+            List<List<Integer>> resList = new ArrayList<>();
+            int left = start, right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+                // 根据 sum 和 target 的大小判断，移动左右指针
+                if (sum < target) {
+                    left++;
+                } else if (sum > target) {
+                    right--;
+                } else {
+                    List<Integer> res = new ArrayList<>();
+                    res.add(nums[left]);
+                    res.add(nums[right]);
+                    resList.add(res);
+                    left++;
+                    right--;
+                }
+            }
+            return resList;
+        }
+
+    }
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    
+    public static void main(String[] args) {
+        Solution solution = new ThreeSum().new Solution();
+        // put your test code here
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> res = solution.threeSum(nums);
+        System.out.println(res);
+    }
+}

@@ -1,9 +1,9 @@
 
 package leetcode.editor.cn;
 
-import java.sql.Array;
 import java.util.*;
-import leetcode.editor.common.*;
+
+import leetcode.editor.common.TreeNode;
 
 public class BinaryTreePreorderTraversal {
 
