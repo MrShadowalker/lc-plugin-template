@@ -18,6 +18,7 @@ public class LinkedListCycle {
      * }
      */
     public class Solution {
+
         public boolean hasCycle(ListNode head) {
             if (head == null || head.next == null) {
                 return false;
@@ -27,9 +28,14 @@ public class LinkedListCycle {
             ListNode fast = head;
 
             while (slow != null && fast != null) {
+
                 slow = slow.next;
-                fast = fast.next.next;
-                System.out.println("slow:" + slow + ",fast:" + fast);
+                if (fast.next != null) {
+                    fast = fast.next.next;
+                } else {
+                    return false;
+                }
+
                 if (slow == fast) {
                     return true;
                 }
@@ -43,5 +49,8 @@ public class LinkedListCycle {
     public static void main(String[] args) {
         Solution solution = new LinkedListCycle().new Solution();
         // put your test code here
+        ListNode head = ListNode.createHead(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
+        head.next.next.next.next.next.next.next.next.next = head.next.next;
+        System.out.println(solution.hasCycle(head));
     }
 }

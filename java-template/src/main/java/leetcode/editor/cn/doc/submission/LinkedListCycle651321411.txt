@@ -1,0 +1,29 @@
+ public class Solution {
+
+        public boolean hasCycle(ListNode head) {
+            if (head == null || head.next == null) {
+                return false;
+            }
+            // 快慢指针，快每次2步、慢每次1步，能追上就说明有环
+            ListNode slow = head;
+            ListNode fast = head;
+
+            while (slow != null && fast != null) {
+
+                slow = slow.next;
+                if (fast.next != null) {
+                    fast = fast.next.next;
+                } else {
+                    return false;
+                }
+
+
+                if (slow == fast) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+//runtime:0 ms
+//memory:43.7 MB

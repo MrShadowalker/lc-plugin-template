@@ -36,6 +36,7 @@ public class ThreeSum {
             int left = start, right = nums.length - 1;
             while (left < right) {
                 int sum = nums[left] + nums[right];
+                int leftNum = nums[left], rightNum = nums[right];
                 // 根据 sum 和 target 的大小判断，移动左右指针
                 if (sum < target) {
                     left++;
@@ -46,8 +47,13 @@ public class ThreeSum {
                     res.add(nums[left]);
                     res.add(nums[right]);
                     resList.add(res);
-                    left++;
-                    right--;
+                    // 跳过所有重复元素
+                    while (left < right && nums[left] == leftNum) {
+                        left++;
+                    }
+                    while (left < right && nums[right] == rightNum) {
+                        right--;
+                    }
                 }
             }
             return resList;
